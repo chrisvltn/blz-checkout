@@ -1,10 +1,48 @@
 import React from 'react'
 import { withRouter, NavLink } from 'react-router-dom';
+import withStyles from 'react-jss'
 
-import jss from 'jss'
-import preset from 'jss-preset-default'
+const CartSteps = ({
+  classes,
+  location,
+}) => {
+  const links = [
+    {
+      text: 'Sacola',
+      to: "/checkout/cart",
+      disabled: location.pathname.indexOf('/placed') > -1,
+    },
+    {
+      text: 'Pagamento',
+      to: "/checkout/payment",
+      disabled: location.pathname.indexOf('/payment') === -1,
+    },
+    {
+      text: 'Confirmação',
+      to: "/checkout/placed",
+      disabled: location.pathname.indexOf('/placed') === -1,
+    },
+  ]
 
-jss.setup(preset())
+  const elements = links.map((link, index) =>
+    link.disabled ?
+      <span className={classes.link} key={index}>
+        {link.text}
+      </span>
+      :
+      <NavLink className={classes.link} activeClassName={classes.activeLink} exact to={link.to} key={index}>
+        {link.text}
+      </NavLink>
+  )
+
+  return (
+    <div>
+      <nav className={classes.container}>
+        {elements}
+      </nav>
+    </div>
+  )
+}
 
 const styles = {
   container: {
@@ -47,45 +85,4 @@ const styles = {
   },
 }
 
-const { classes } = jss.createStyleSheet(styles).attach()
-
-const CartSteps = ({ location }) => {
-  const links = [
-    {
-      text: 'Sacola',
-      to: "/checkout/cart",
-      disabled: location.pathname.indexOf('/placed') > -1,
-    },
-    {
-      text: 'Pagamento',
-      to: "/checkout/payment",
-      disabled: location.pathname.indexOf('/payment') === -1,
-    },
-    {
-      text: 'Confirmação',
-      to: "/checkout/placed",
-      disabled: location.pathname.indexOf('/placed') === -1,
-    },
-  ]
-
-  const elements = links.map((link, index) =>
-    link.disabled ?
-      <span className={classes.link} key={index}>
-        {link.text}
-      </span>
-      :
-      <NavLink className={classes.link} activeClassName={classes.activeLink} exact to={link.to} key={index}>
-        {link.text}
-      </NavLink>
-  )
-
-  return (
-    <div>
-      <nav className={classes.container}>
-        {elements}
-      </nav>
-    </div>
-  )
-}
-
-export default withRouter(CartSteps)
+export default withStyles(styles)(withRouter(CartSteps))

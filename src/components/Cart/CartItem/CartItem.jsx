@@ -1,9 +1,21 @@
 import React from 'react'
+import withStyles from 'react-jss'
 
-import jss from 'jss'
-import preset from 'jss-preset-default'
-
-jss.setup(preset())
+const CartItem = ({
+  classes,
+  name,
+  thumb,
+  price,
+}) =>
+  <div className={classes.card}>
+    <div className={classes.column + ' ' + classes.thumb}>
+      <img src={thumb} alt={name} className={classes.thumb} />
+    </div>
+    <div className={classes.column}>
+      <span className={classes.productName}>{name}</span>
+      <span className={classes.productPrice}>R$ {price.toFixed(2).replace('.', ',')}</span>
+    </div>
+  </div>
 
 const styles = {
   card: {
@@ -50,21 +62,4 @@ const styles = {
   },
 }
 
-const { classes } = jss.createStyleSheet(styles).attach()
-
-const CartItem = ({
-  name,
-  thumb,
-  price,
-}) =>
-  <div className={classes.card}>
-    <div className={classes.column + ' ' + classes.thumb}>
-      <img src={thumb} alt={name} className={classes.thumb} />
-    </div>
-    <div className={classes.column}>
-      <span className={classes.productName}>{name}</span>
-      <span className={classes.productPrice}>R$ {price.toFixed(2).replace('.', ',')}</span>
-    </div>
-  </div>
-
-export default CartItem
+export default withStyles(styles)(CartItem)

@@ -1,9 +1,93 @@
 import React, { Component } from 'react'
 import MaskedInput from 'react-text-mask'
-import jss from 'jss'
-import preset from 'jss-preset-default'
+import withStyles from 'react-jss'
 
-jss.setup(preset())
+class Input extends Component {
+  state = {
+    value: '',
+    used: false,
+    valid: false,
+    error: null,
+  }
+
+  onInputChange(event) {
+    if (this.props.onChange)
+      this.props.onChange(event)
+
+    const value = (event.target.value || '').replace(/_$/g, '')
+
+    // Validate value
+    let error = null
+    for (let validation of (this.props.validations || [])) {
+      const isValid = validation.handler(value)
+      if (!isValid) {
+        error = validation.error
+        break
+      }
+    }
+
+    const valid = !error
+
+    // Call custom events
+    if (valid && this.props.onValid)
+      this.props.onValid(value)
+    if (this.state.valid && !valid && this.props.onInvalid)
+      this.props.onInvalid(value)
+
+    // Refresh state
+    this.setState({
+      used: true,
+      value,
+      valid,
+      error,
+    })
+  }
+
+  render() {
+    const {
+      classes,
+      label = '',
+      mask = null,
+    } = this.props
+
+    let element
+
+    const commonProps = {
+      className: classes.input + (this.state.error ? ' ' + classes.errorInput : ''),
+      value: this.state.value,
+      onChange: event => this.onInputChange(event)
+    }
+
+    const customProps = ['label', 'mask', 'onValid', 'onInvalid', 'validations']
+    const remainingProps = { ...this.props }
+    customProps.forEach(key => { delete remainingProps[key] })
+
+    // Check masked input
+    if (mask) {
+      const maskArray = (mask || '').split('').map(char => char === '#' ? /\d/ : char)
+      element = <MaskedInput {...remainingProps} {...commonProps} mask={maskArray} />
+    } else {
+      element = <input {...remainingProps} {...commonProps} />
+    }
+
+    // Adds error
+    let error = this.state.error ? (
+      <span className={classes.errorMessage}>
+        {this.state.error}
+      </span>
+    ) : null
+
+    return (
+      <div className={classes.container}>
+        <label className={classes.block}>
+          <span className={classes.label}>{label}:</span>
+          {element}
+          {error}
+        </label>
+      </div>
+    )
+  }
+}
 
 const styles = {
   block: {
@@ -76,92 +160,4 @@ const styles = {
   }
 }
 
-const { classes } = jss.createStyleSheet(styles).attach()
-
-class Input extends Component {
-  state = {
-    value: '',
-    used: false,
-    valid: false,
-    error: null,
-  }
-
-  onInputChange(event) {
-    if (this.props.onChange)
-      this.props.onChange(event)
-
-    const value = (event.target.value || '').replace(/_$/g, '')
-
-    // Validate value
-    let error = null
-    for (let validation of (this.props.validations || [])) {
-      const isValid = validation.handler(value)
-      if (!isValid) {
-        error = validation.error
-        break
-      }
-    }
-
-    const valid = !error
-
-    // Call custom events
-    if (valid && this.props.onValid)
-      this.props.onValid(value)
-    if (this.state.valid && !valid && this.props.onInvalid)
-      this.props.onInvalid(value)
-
-    // Refresh state
-    this.setState({
-      used: true,
-      value,
-      valid,
-      error,
-    })
-  }
-
-  render() {
-    const {
-      label = '',
-      mask = null,
-    } = this.props
-
-    let element
-
-    const commonProps = {
-      className: classes.input + (this.state.error ? ' ' + classes.errorInput : ''),
-      value: this.state.value,
-      onChange: event => this.onInputChange(event)
-    }
-
-    const customProps = ['label', 'mask', 'onValid', 'onInvalid', 'validations']
-    const remainingProps = { ...this.props }
-    customProps.forEach(key => { delete remainingProps[key] })
-
-    // Check masked input
-    if (mask) {
-      const maskArray = (mask || '').split('').map(char => char === '#' ? /\d/ : char)
-      element = <MaskedInput {...remainingProps} {...commonProps} mask={maskArray} />
-    } else {
-      element = <input {...remainingProps} {...commonProps} />
-    }
-
-    // Adds error
-    let error = this.state.error ? (
-      <span className={classes.errorMessage}>
-        {this.state.error}
-      </span>
-    ) : null
-
-    return (
-      <div className={classes.container}>
-        <label className={classes.block}>
-          <span className={classes.label}>{label}:</span>
-          {element}
-          {error}
-        </label>
-      </div>
-    )
-  }
-}
-
-export default Input
+export default withStyles(styles)(Input)

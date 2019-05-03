@@ -12,14 +12,15 @@ import { Provider } from 'react-redux'
 import store from './store/store'
 
 // JSS
-import jss from 'jss'
-import preset from 'jss-preset-default'
-jss.setup(preset())
+import { JssProvider } from 'react-jss'
+import jss from './lib/jss';
 
 const app =
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <JssProvider jss={jss}>
+        <App />
+      </JssProvider>
     </BrowserRouter>
   </Provider>
 

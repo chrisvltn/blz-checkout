@@ -1,9 +1,34 @@
 import React from 'react'
+import withStyles from 'react-jss'
 
-import jss from 'jss'
-import preset from 'jss-preset-default'
+const TotalizersItem = ({
+  classes,
+  name,
+  price,
+  highlight,
+}) => {
+  const commonClasses = [classes.column]
+  let priceText = `R$ ${Math.abs(price).toFixed(2).replace('.', ',')}`
 
-jss.setup(preset())
+  if (highlight)
+    commonClasses.push(classes.highlight)
+
+  if (price < 0) {
+    commonClasses.push(classes.discountHighlight)
+    priceText = '- ' + priceText
+  }
+
+  return (
+    <div className={classes.row}>
+      <span className={commonClasses.concat(classes.name).join(' ')}>
+        {name}
+      </span>
+      <span className={commonClasses.concat(classes.price).join(' ')}>
+        {priceText}
+      </span>
+    </div>
+  )
+}
 
 const styles = {
   row: {
@@ -35,34 +60,4 @@ const styles = {
   },
 }
 
-const { classes } = jss.createStyleSheet(styles).attach()
-
-const TotalizersItem = ({
-  name,
-  price,
-  highlight,
-}) => {
-  const commonClasses = [classes.column]
-  let priceText = `R$ ${Math.abs(price).toFixed(2).replace('.', ',')}`
-
-  if (highlight)
-    commonClasses.push(classes.highlight)
-
-  if (price < 0) {
-    commonClasses.push(classes.discountHighlight)
-    priceText = '- ' + priceText
-  }
-
-  return (
-    <div className={classes.row}>
-      <span className={commonClasses.concat(classes.name).join(' ')}>
-        {name}
-      </span>
-      <span className={commonClasses.concat(classes.price).join(' ')}>
-        {priceText}
-      </span>
-    </div>
-  )
-}
-
-export default TotalizersItem
+export default withStyles(styles)(TotalizersItem)

@@ -1,8 +1,26 @@
 import React from 'react'
-import jss from 'jss'
-import preset from 'jss-preset-default'
+import withStyles from 'react-jss'
 
-jss.setup(preset())
+const Card = ({
+  classes,
+  transparent,
+  className,
+  children,
+  ...props,
+}) => {
+  const appliedClasses = [classes.card]
+
+  appliedClasses.push(transparent ? classes.transparent : classes.white)
+
+  if (className)
+    appliedClasses.push(className)
+
+  return (
+    <div className={appliedClasses.join(' ')} {...props}>
+      {children}
+    </div>
+  )
+}
 
 const styles = {
   card: {
@@ -30,26 +48,4 @@ const styles = {
   },
 }
 
-const { classes } = jss.createStyleSheet(styles).attach()
-
-const Card = ({
-  transparent,
-  className,
-  children,
-  ...props,
-}) => {
-  const appliedClasses = [classes.card]
-
-  appliedClasses.push(transparent ? classes.transparent : classes.white)
-
-  if (className)
-    appliedClasses.push(className)
-
-  return (
-    <div className={appliedClasses.join(' ')} {...props}>
-      {children}
-    </div>
-  )
-}
-
-export default Card
+export default withStyles(styles)(Card)

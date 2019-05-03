@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import withStyles from 'react-jss'
 
 import Card from '../../components/UI/Card/Card';
 import Title from '../../components/UI/Title/Title';
@@ -9,35 +10,16 @@ import TotalizersList from '../../components/Totalizers/TotalizersList/Totalizer
 
 import { withRouter } from 'react-router-dom';
 
-import jss from 'jss'
-import preset from 'jss-preset-default'
-
-jss.setup(preset())
-
-const styles = {
-  '@media (min-width: 1024px)': {
-    row: {
-      display: 'flex',
-    },
-    left: {
-      width: '55%',
-    },
-    right: {
-      flex: 'auto',
-      padding: { left: 20 },
-      margin: { top: 25 },
-    },
-  }
-}
-
-const { classes } = jss.createStyleSheet(styles).attach()
-
 class CartPage extends Component {
   goToPayment() {
     this.props.history.push('/checkout/payment')
   }
 
   render() {
+    const {
+      classes
+    } = this.props
+
     return (
       <div className={classes.row}>
         <div className={classes.left}>
@@ -58,4 +40,20 @@ class CartPage extends Component {
   }
 }
 
-export default withRouter(CartPage)
+const styles = {
+  '@media (min-width: 1024px)': {
+    row: {
+      display: 'flex',
+    },
+    left: {
+      width: '55%',
+    },
+    right: {
+      flex: 'auto',
+      padding: { left: 20 },
+      margin: { top: 25 },
+    },
+  }
+}
+
+export default withStyles(styles)(withRouter(CartPage))

@@ -6,8 +6,6 @@ import Button from '../../components/UI/Button/Button';
 
 import TotalizersList from '../../components/Totalizers/TotalizersList/TotalizersList';
 
-import jss from 'jss'
-import preset from 'jss-preset-default'
 import Input from '../../components/UI/Input/Input';
 import required from '../../helpers/validations/required';
 import minlength from '../../helpers/validations/minlength';
@@ -15,46 +13,10 @@ import maxlength from '../../helpers/validations/maxlength';
 
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
+import withStyles from 'react-jss'
 
 import { addPayment } from '../../store/actions/payment';
 import Spinner from '../../components/UI/Spinner/Spinner';
-
-jss.setup(preset())
-
-const styles = {
-  row: {
-    display: 'block',
-    margin: [0, -10],
-    '&:after': {
-      content: '""',
-      display: 'block',
-      clear: 'both',
-    },
-  },
-  column: {
-    float: 'left',
-    padding: [0, 10],
-    margin: { top: 20 },
-    '&:first-child': {
-      margin: { top: 0 }
-    }
-  },
-  '@media (min-width: 1024px)': {
-    containerRow: {
-      display: 'flex',
-    },
-    leftContainer: {
-      width: '55%',
-    },
-    rightContainer: {
-      flex: 'auto',
-      padding: { left: 20 },
-      margin: { top: 25 },
-    },
-  }
-}
-
-const { classes } = jss.createStyleSheet(styles).attach()
 
 // As this validation is specific to this form, it doesn't need to be separated as the other validation functions
 const dateCheckValidation = {
@@ -158,6 +120,10 @@ class PaymentFormPage extends Component {
   }
 
   render() {
+    const {
+      classes
+    } = this.props
+
     return (
       <div className={classes.containerRow}>
         <div className={classes.leftContainer}>
@@ -191,8 +157,41 @@ class PaymentFormPage extends Component {
   }
 }
 
+const styles = {
+  row: {
+    display: 'block',
+    margin: [0, -10],
+    '&:after': {
+      content: '""',
+      display: 'block',
+      clear: 'both',
+    },
+  },
+  column: {
+    float: 'left',
+    padding: [0, 10],
+    margin: { top: 20 },
+    '&:first-child': {
+      margin: { top: 0 }
+    }
+  },
+  '@media (min-width: 1024px)': {
+    containerRow: {
+      display: 'flex',
+    },
+    leftContainer: {
+      width: '55%',
+    },
+    rightContainer: {
+      flex: 'auto',
+      padding: { left: 20 },
+      margin: { top: 25 },
+    },
+  }
+}
+
 const mapDispatchToProps = dispatch => ({
   addPayment: (creditCardNumber, creditCardHolder, creditCardExpDate) => dispatch(addPayment(creditCardNumber, creditCardHolder, creditCardExpDate)),
 })
 
-export default withRouter(connect(null, mapDispatchToProps)(PaymentFormPage))
+export default withStyles(styles)(withRouter(connect(null, mapDispatchToProps)(PaymentFormPage)))

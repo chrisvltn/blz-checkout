@@ -7,34 +7,7 @@ import CartItemList from '../../components/Cart/CartItemList/CartItemList';
 import TotalizersList from '../../components/Totalizers/TotalizersList/TotalizersList';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-
-import jss from 'jss'
-import preset from 'jss-preset-default'
-
-jss.setup(preset())
-
-const styles = {
-  paymentInfo: {
-    fontSize: 14,
-    lineHeight: '17px',
-    margin: { bottom: 0 },
-  },
-  '@media (min-width: 1024px)': {
-    containerRow: {
-      display: 'flex',
-    },
-    leftContainer: {
-      width: '55%',
-    },
-    rightContainer: {
-      flex: 'auto',
-      padding: { left: 20 },
-      margin: { top: 25 },
-    },
-  }
-}
-
-const { classes } = jss.createStyleSheet(styles).attach()
+import withStyles from 'react-jss'
 
 class ConfirmationPage extends Component {
   componentDidMount() {
@@ -49,6 +22,7 @@ class ConfirmationPage extends Component {
 
   render() {
     const {
+      classes,
       creditCardNumber, // The number is already processed by the reducer, so it will show only the last 4 digits
       creditCardHolder,
       creditCardExpDate,
@@ -82,10 +56,31 @@ class ConfirmationPage extends Component {
   }
 }
 
+const styles = {
+  paymentInfo: {
+    fontSize: 14,
+    lineHeight: '17px',
+    margin: { bottom: 0 },
+  },
+  '@media (min-width: 1024px)': {
+    containerRow: {
+      display: 'flex',
+    },
+    leftContainer: {
+      width: '55%',
+    },
+    rightContainer: {
+      flex: 'auto',
+      padding: { left: 20 },
+      margin: { top: 25 },
+    },
+  }
+}
+
 const mapStateToProps = state => ({
   creditCardNumber: state.payment.creditCardNumber,
   creditCardHolder: state.payment.creditCardHolder,
   creditCardExpDate: state.payment.creditCardExpDate
 })
 
-export default withRouter(connect(mapStateToProps)(ConfirmationPage))
+export default withStyles(styles)(withRouter(connect(mapStateToProps)(ConfirmationPage)))

@@ -1,10 +1,15 @@
 import React from 'react'
 import success from '../../assets/images/success-icon.png'
+import withStyles from 'react-jss'
 
-import jss from 'jss'
-import preset from 'jss-preset-default'
-
-jss.setup(preset())
+const BigMessage = ({
+  classes,
+  message,
+}) =>
+  <div className={classes.container}>
+    <img src={success} className={classes.icon} alt="Success" />
+    <span className={classes.text}>{message}</span>
+  </div>
 
 const styles = {
   container: {
@@ -30,14 +35,4 @@ const styles = {
   },
 }
 
-const { classes } = jss.createStyleSheet(styles).attach()
-
-const BigMessage = ({
-  message,
-}) =>
-  <div className={classes.container}>
-    <img src={success} className={classes.icon} alt="Success" />
-    <span className={classes.text}>{message}</span>
-  </div>
-
-export default BigMessage
+export default withStyles(styles)(BigMessage)
