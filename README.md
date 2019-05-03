@@ -1,42 +1,73 @@
-## Frontend Test
+# [Simple Checkout]
 
-Faça um fork deste repositório e finalizar o teste, submeta um pull request para o repositório que nosso time será notificado.
+*An simple 3-steps checkout developed with React and Redux based on an [Invision layout] and a [mocked API]*
 
-O teste consiste em um checkout simples contendo 3 passos (carrinho, pagamento e sucesso) [Veja o Layout](https://projects.invisionapp.com/prototype/font-test-cji0j0khf005c1t0132358e8k)
+## [Live demo]
 
-**Faça quando quiser/puder (madrugada, fim de semana, etc)**
+*(as it is just a demo, the payment isn't really processed)*
 
-### Requerimentos
+[![Live demo](readme/demo.png)](https://chrisvltn.github.io/blz-checkout)
 
-- Pixel perfect ([nesse link](https://projects.invisionapp.com/prototype/font-test-cji0j0khf005c1t0132358e8k), você pode inspecionar para ver espaçamentos, fonte, tamanho, etc)
-- A aplicação precisa ser responsiva, utilizando o conceito de mobile-first. Use sua imaginação para entregar uma experiência boa no desktop.
-- Renderize cada passo em uma URL única (lib de rotas).
-- Utilize ReactJS
+## Installation
+
+### `Step 1` - clone the repo
+
+```bash
+$ git clone https://github.com/chrisvltn/blz-checkout.git
+```
+
+### `Step 2` - cd in the repo
+
+```bash
+$ cd blz-checkout
+```
+
+### `Step 3` - install dependencies
+
+```bash
+$ npm install
+```
+
+### `Step 4` - run application
+
+```bash
+$ npm start
+```
+
+In browser, open http://localhost:3000
+
+## Testing
+
+```bash
+$ npm run test
+```
+
+## Deployment
+
+```bash
+$ npm run deploy
+```
+
+## Built with
+
+- [x] - [React]
+- [x] - [Redux]
+- [x] - [JSS] - CSS in JS
+
+## Main Features
+
+- [x] - Asynchronous code splitting
+- [x] - Form validation
+- [x] - REST Mock API Integration
+- [x] - Pixel perfect
+- [x] - Responsive layout
 
 
-### Passo 1 - Carrinho:
-  - Consuma o [esse endpoint](http://www.mocky.io/v2/5b15c4923100004a006f3c07) e liste os itens do carrinho, bem como o resumo do carrinho;
-  - Persista o conteúdo do JSON para ser usado nas próximas etapas (store do redux é nossa sugestão);
-
-### Passo 2 - Pagamento: 
-  - Exiba um form com campos de cartão de crédito com validação em cada campo;
-  - Habilite o botão de Finalizar Pedido apenas se o form esteja válido;
-
-### Passo 3 - Sucesso: 
-  - Todo o conteúdo deverá ser exibido a partir dos dados persistidos;
-  
-### O que vamos avaliar:
-  - Organização do código;
-  - Mensagens (em inglês) e mudanças nos commits;
-  - Composição/reutilização de componentes;
-  - Testes unitários;
-  - O motivo de ter escolhido cada tech da stack;
-  - Como rodar sua aplicação ;)
-
-### Diferenciais:
-  - Split bundle por rota (cada step ter um bundle separado para otimizar a performance);
-  - CSS in JS;
-  - React/Redux;
-
-### Fim:
-Ao finalizar o teste, submeta um pull request para o repositório que nosso time será notificado. Se tiver alguma observação, escreva no pull request.
+[Simple Checkout]: https://chrisvltn.github.io/blz-checkout
+[Live demo]: https://chrisvltn.github.io/blz-checkout
+[React]: https://reactjs.org/
+[Redux]: https://redux.js.org/
+[JSS]: https://cssinjs.org/
+[chrisvltn]: https://github.com/chrisvltn
+[Invision layout]: https://projects.invisionapp.com/prototype/front-test-cji0j0khf005c1t0132358e8k
+[mocked API]: https://www.mocky.io/v2/5b15c4923100004a006f3c07
