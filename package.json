@@ -1,7 +1,8 @@
 {
-  "name": "test-front",
+  "name": "blz-checkout",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://chrisvltn.github.io/blz-checkout",
   "dependencies": {
     "axios": "^0.18.0",
     "enzyme": "^3.9.0",
@@ -19,13 +20,15 @@
     "styled-jss": "^2.2.3"
   },
   "devDependencies": {
+    "gh-pages": "^2.0.1",
     "react-scripts": "2.1.8"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

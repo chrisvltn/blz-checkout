@@ -44,7 +44,7 @@ class CheckoutPage extends Component {
   }
 
   async getCart() {
-    const { data } = await Axios.get('http://www.mocky.io/v2/5b15c4923100004a006f3c07')
+    const { data } = await Axios.get('https://www.mocky.io/v2/5b15c4923100004a006f3c07')
     return data
   }
 

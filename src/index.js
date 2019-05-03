@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 /* Libs */
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 
 /* Redux */
 import { Provider } from 'react-redux'
@@ -17,11 +17,11 @@ import jss from './lib/jss';
 
 const app =
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       <JssProvider jss={jss}>
         <App />
       </JssProvider>
-    </BrowserRouter>
+    </HashRouter>
   </Provider>
 
 ReactDOM.render(app, document.getElementById('root'));
