@@ -1,14 +1,29 @@
 import React, { Component } from 'react'
-import CartPage from '../CartPage/CartPage';
-import CartSteps from '../../components/CartSteps/CartSteps';
-import Container from '../Container/Container';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import PaymentFormPage from '../PaymentFormPage/PaymentFormPage';
+import Loadable from 'react-loadable'
+import { connect } from 'react-redux'
+import Axios from 'axios';
 
 import { addProducts, startLoading, finishLoading, updateTotalizers } from '../../store/actions/cart';
-import Axios from 'axios';
-import { connect } from 'react-redux'
-import ConfirmationPage from '../ConfirmationPage/ConfirmationPage';
+
+import CartSteps from '../../components/CartSteps/CartSteps';
+import Container from '../Container/Container';
+import PageLoading from '../PageLoading/PageLoading';
+
+const AsyncCartPage = Loadable({
+  loader: () => import('../CartPage/CartPage'),
+  loading: PageLoading,
+})
+
+const AsyncPaymentFormPage = Loadable({
+  loader: () => import('../PaymentFormPage/PaymentFormPage'),
+  loading: PageLoading,
+})
+
+const AsyncConfirmationPage = Loadable({
+  loader: () => import('../ConfirmationPage/ConfirmationPage'),
+  loading: PageLoading,
+})
 
 class CheckoutPage extends Component {
   async componentDidMount() {
@@ -35,9 +50,9 @@ class CheckoutPage extends Component {
         </header>
         <Container>
           <Switch>
-            <Route path="/checkout/cart" exact component={CartPage} />
-            <Route path="/checkout/payment" component={PaymentFormPage} />
-            <Route path="/checkout/placed" component={ConfirmationPage} />
+            <Route path="/checkout/cart" exact component={AsyncCartPage} />
+            <Route path="/checkout/payment" component={AsyncPaymentFormPage} />
+            <Route path="/checkout/placed" component={AsyncConfirmationPage} />
             <Redirect path="/checkout" to="/checkout/cart" />
           </Switch>
         </Container>
