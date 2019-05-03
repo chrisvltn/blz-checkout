@@ -1,6 +1,6 @@
 # [Simple Checkout]
 
-*An simple 3-steps checkout developed with React and Redux based on an [Invision layout] and a [mocked API]*
+*A simple 3-steps checkout developed with React and Redux based on an [Invision layout] and a [mocked API]*
 
 ## [Live demo]
 
