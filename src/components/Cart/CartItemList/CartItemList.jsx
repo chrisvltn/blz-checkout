@@ -1,6 +1,11 @@
+/* React */
 import React from 'react'
-import CartItem from '../CartItem/CartItem';
+
+/* Libs */
 import { connect } from 'react-redux'
+
+/* Custom components */
+import CartItem from '../CartItem/CartItem';
 
 export const CartItemList = ({ items }) =>
   <div>

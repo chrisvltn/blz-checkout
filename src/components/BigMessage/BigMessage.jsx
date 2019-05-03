@@ -1,6 +1,10 @@
+/* React */
 import React from 'react'
-import success from '../../assets/images/success-icon.png'
+
+/* Libs */
 import withStyles from 'react-jss'
+
+import success from '../../assets/images/success-icon.png'
 
 const BigMessage = ({
   classes,

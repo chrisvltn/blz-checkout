@@ -1,7 +1,13 @@
+/* React */
 import React from 'react'
+
+/* Libs */
 import withStyles from 'react-jss'
+
+/* Components */
 import { Link } from 'react-router-dom';
 
+/* Custom components */
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 const PageLoading = ({

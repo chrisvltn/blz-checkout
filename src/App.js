@@ -1,8 +1,14 @@
+/* React */
 import React, { Component } from 'react';
+
+/* Libs */
 import Loadable from 'react-loadable'
 import { Switch, Route, Redirect } from 'react-router-dom';
+
+/* Custom components */
 import PageLoading from './containers/PageLoading/PageLoading';
 
+/* Routes */
 const AsyncCheckoutPage = Loadable({
   loader: () => import('./containers/CheckoutPage/CheckoutPage'),
   loading: PageLoading,

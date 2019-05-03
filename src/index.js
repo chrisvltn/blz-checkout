@@ -4,14 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// Libs
+/* Libs */
 import { BrowserRouter } from 'react-router-dom'
 
-// Redux
+/* Redux */
 import { Provider } from 'react-redux'
 import store from './store/store'
 
-// JSS
+/* JSS */
 import { JssProvider } from 'react-jss'
 import jss from './lib/jss';
 

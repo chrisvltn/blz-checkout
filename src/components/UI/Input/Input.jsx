@@ -1,6 +1,11 @@
+/* React */
 import React, { Component } from 'react'
-import MaskedInput from 'react-text-mask'
+
+/* Libs */
 import withStyles from 'react-jss'
+
+/* Components */
+import MaskedInput from 'react-text-mask'
 
 class Input extends Component {
   state = {

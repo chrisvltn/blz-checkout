@@ -1,15 +1,21 @@
+/* React */
 import React, { Component } from 'react'
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import Loadable from 'react-loadable'
-import { connect } from 'react-redux'
-import Axios from 'axios';
 
+/* Libs */
+import Axios from 'axios';
+import Loadable from 'react-loadable'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux'
+
+/* Redux */
 import { addProducts, startLoading, finishLoading, updateTotalizers } from '../../store/actions/cart';
 
+/* Custom components */
 import CartSteps from '../../components/CartSteps/CartSteps';
 import Container from '../Container/Container';
 import PageLoading from '../PageLoading/PageLoading';
 
+/* Routes */
 const AsyncCartPage = Loadable({
   loader: () => import('../CartPage/CartPage'),
   loading: PageLoading,

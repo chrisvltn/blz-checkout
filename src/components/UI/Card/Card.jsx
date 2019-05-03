@@ -1,4 +1,7 @@
+/* React */
 import React from 'react'
+
+/* Libs */
 import withStyles from 'react-jss'
 
 const Card = ({

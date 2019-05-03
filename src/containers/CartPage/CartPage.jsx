@@ -1,6 +1,11 @@
+/* React */
 import React, { Component } from 'react'
-import withStyles from 'react-jss'
 
+/* Libs */
+import withStyles from 'react-jss'
+import { withRouter } from 'react-router-dom';
+
+/* Custom components */
 import Card from '../../components/UI/Card/Card';
 import Title from '../../components/UI/Title/Title';
 import Button from '../../components/UI/Button/Button';
@@ -8,7 +13,6 @@ import Button from '../../components/UI/Button/Button';
 import CartItemList from '../../components/Cart/CartItemList/CartItemList';
 import TotalizersList from '../../components/Totalizers/TotalizersList/TotalizersList';
 
-import { withRouter } from 'react-router-dom';
 
 class CartPage extends Component {
   goToPayment() {

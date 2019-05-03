@@ -1,22 +1,27 @@
+/* React */
 import React, { Component } from 'react'
 
-import Card from '../../components/UI/Card/Card';
-import Title from '../../components/UI/Title/Title';
-import Button from '../../components/UI/Button/Button';
-
-import TotalizersList from '../../components/Totalizers/TotalizersList/TotalizersList';
-
-import Input from '../../components/UI/Input/Input';
-import required from '../../helpers/validations/required';
-import minlength from '../../helpers/validations/minlength';
-import maxlength from '../../helpers/validations/maxlength';
-
+/* Libs */
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import withStyles from 'react-jss'
 
+/* Redux */
 import { addPayment } from '../../store/actions/payment';
+
+/* Validations */
+import required from '../../helpers/validations/required';
+import minlength from '../../helpers/validations/minlength';
+import maxlength from '../../helpers/validations/maxlength';
+
+/* Custom componentns */
+import Card from '../../components/UI/Card/Card';
+import Title from '../../components/UI/Title/Title';
+import Button from '../../components/UI/Button/Button';
+import Input from '../../components/UI/Input/Input';
 import Spinner from '../../components/UI/Spinner/Spinner';
+
+import TotalizersList from '../../components/Totalizers/TotalizersList/TotalizersList';
 
 // As this validation is specific to this form, it doesn't need to be separated as the other validation functions
 const dateCheckValidation = {

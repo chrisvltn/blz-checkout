@@ -1,8 +1,12 @@
+/* React */
 import React from 'react'
 
-import TotalizersItem from '../TotalizersItem/TotalizersItem';
-import Card from '../../UI/Card/Card';
+/* Libs */
 import { connect } from 'react-redux'
+
+/* Custom components */
+import Card from '../../UI/Card/Card';
+import TotalizersItem from '../TotalizersItem/TotalizersItem';
 
 const TotalizersList = ({ totalizers }) => {
   const items = [
